@@ -1,0 +1,48 @@
+class Soldats:
+	def __init__(self,joueurId,groupeId,tuplePos,size):
+		self.joueurId = joueurId
+		self.groupeId = groupeId
+		self.tuplePos = tuplePos
+		self.size = size
+
+	def getPos(self):
+		return self.tuplePos
+	
+	def setPosSoldat(self,nouvellePos):
+		self.tuplePos = nouvellePos
+
+class Evenements:
+	def __init__(self,posEvents,typeEvent,niveauEvent,tempsEvent):
+		self.posEvents = posEvents
+		self.typeEvent = typeEvent
+		self.niveauEvent = niveauEvent
+		self.tempsEvent = tempsEvent
+class Grille:
+	def __init__(self,nbCases):
+		#self.dicoRisk = self.constructionDico(nbCases)
+		self.setCasesEnnemies = set()
+		self.setCasesAllies = set()
+		self.setCasesMalus = set()
+		self.setCasesBonus = set()
+		self.setCasesLibres = set(dicoRisk.keys())		
+
+	def getEvents(self):
+		return self.setCasesEnnemies
+
+	def getSoldats(self):
+		return self.setCasesAllies
+
+	def voisinagePossibles(self,pos):
+		##pos est un tuple de int
+		listePosPossibles = []
+		listeVoisinsPossibles = [(pos[0]+1,pos[0]),(pos[0]-1,pos[0]),(pos[0],pos[0]+1),(pos[0],pos[0]-1)]
+			
+		for posPos in listeVoisinsPossibles:
+			if posPossible in self.setCasesLibres:
+				listePosPossibles.append(posPossible)
+		return listePosPossibles
+
+	def deplacementSoldat(self,soldat,newPos):
+		self.setCasesAllies.remove(soldat.getPos())
+		soldat.setPosSoldat(newPos)
+		self.setCasesAllies.add(soldat.getPos())
